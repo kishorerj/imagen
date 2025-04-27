@@ -8,12 +8,18 @@ from vertexai.preview.language_models import TextEmbeddingModel
 from google.cloud import aiplatform
 
 import pandas as pd
+import ssl
+
+# Disable SSL verification (not recommended for production)
+ssl._create_default_https_context = ssl._create_unverified_context
 
 CSV_URL = "https://raw.githubusercontent.com/GoogleCloudPlatform/generative-ai/main/gemini/sample-apps/photo-discovery/ag-web/google_merch_shop_items.csv"
 
 # Load the CSV file into a DataFrame
+df = pd.read_csv(CSV_URL)
+# Load the CSV file into a DataFrame
 # df = pd.read_csv(CSV_URL)
-# df["title"]
+df["title"]
 
 aiplatform.init(project='kishorejoonix1', location='us-central1')
 
@@ -29,7 +35,11 @@ def get_dense_embedding(text):
 get_dense_embedding("Chrome Dino Pin")
 
 # Initialize TfidfVectorizer
+# Initialize TfidfVectorizer
 vectorizer = TfidfVectorizer()
+corpus = df.title.tolist()
+# Fit and Transform
+vectorizer.fit_transform(corpus)
 
 def get_sparse_embedding(text):
     # Transform Text into TF-IDF Sparse Vector
@@ -59,11 +69,9 @@ UID='04181118'
 #point to the vector search endpoint
 
 DEPLOYED_HYBRID_INDEX_ID = f"vs_hybridsearch_deployed_{UID}"
-my_index_endpoint = aiplatform.MatchingEngineIndexEndpoint.create(
-    display_name=f"vs-hybridsearch-index-endpoint-{UID}", public_endpoint_enabled=True
-)
 
-response = my_index_endpoint.find_neighbors(
+index_endpoint = aiplatform.MatchingEngineIndexEndpoint('projects/773497872666/locations/us-central1/indexEndpoints/9166509693512712192')
+response = index_endpoint.find_neighbors(
     deployed_index_id=DEPLOYED_HYBRID_INDEX_ID,
     queries=[query],
     num_neighbors=10,
@@ -71,7 +79,7 @@ response = my_index_endpoint.find_neighbors(
 
 # print results
 for idx, neighbor in enumerate(response[0]):
-    title = 'abc'#df.title[int(neighbor.id)]
+    title = df.title[int(neighbor.id)]
     dense_dist = neighbor.distance if neighbor.distance else 0.0
     sparse_dist = neighbor.sparse_distance if neighbor.sparse_distance else 0.0
     print(f"{title:<40}: dense_dist: {dense_dist:.3f}, sparse_dist: {sparse_dist:.3f}")

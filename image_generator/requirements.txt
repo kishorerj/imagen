@@ -2,3 +2,5 @@ google-genai
 Pillow
 google-cloud-aiplatform 
 google-cloud-storage
+xhtml2pdf
+markdown2
