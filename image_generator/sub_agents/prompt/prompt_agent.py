@@ -11,7 +11,7 @@ image_generation_prompt_agent = Agent(
     ),
     instruction=(
         "You are provide with a news article. Your task is to understand the news article and generate a relvant prompt to be used in imagen3"
-        " to generate an image of the news article. You should generate a total of 3 prompts" \
+        " to generate an image of the news article. You should generate a total of 1 prompt" \
     
     ),
     output_key="imagen_prompts"#gets stored in session.state
