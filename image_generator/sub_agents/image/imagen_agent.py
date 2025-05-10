@@ -30,10 +30,10 @@ def generate_images(prompt: str,  tool_context: ToolContext):
             for generated_image in response.generated_images:
                     # Get the image bytes
                 image_bytes = generated_image.image.image_bytes  
-            
-                artifact_name = f"generated_image_"+ str(tool_context.state.get('loop_iteration', 0)) + ".png"
+                counter= str(tool_context.state.get('loop_iteration', 0))
+                artifact_name = f"generated_image_"+ counter + ".png"
                 # call save to gcs function
-                save_to_gcs(tool_context, image_bytes, artifact_name)
+                save_to_gcs(tool_context, image_bytes, artifact_name, counter)
                 
                 # Save as ADK artifact (optional, if still needed by other ADK components)
                 report_artifact = types.Part.from_bytes(
@@ -62,17 +62,18 @@ def generate_images(prompt: str,  tool_context: ToolContext):
          traceback.print_exc()
          return {'status': 'error', 'message': 'No images generated.  {e}' }
     
-def save_to_gcs(tool_context: ToolContext, image_bytes, filename: str): 
+def save_to_gcs(tool_context: ToolContext, image_bytes, filename: str, counter:str): 
         # --- Save to GCS ---
     storage_client = storage.Client() # Initialize GCS client
     bucket_name = "kishorerj-imagen"
-
+    unique_id = tool_context.state.get('unique_id','')
     current_date_str = datetime.utcnow().strftime("%Y-%m-%d")
-    unique_filename = f"generated_image.png"
-    gcs_blob_name = f"{current_date_str}/{unique_filename}"
+    unique_filename = filename
+    gcs_blob_name = f"{current_date_str}/{unique_id}/{unique_filename}"
 
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(gcs_blob_name)
+
 
     try:
         blob.upload_from_string(image_bytes, content_type="image/png")
@@ -80,8 +81,9 @@ def save_to_gcs(tool_context: ToolContext, image_bytes, filename: str):
         print(f"Image successfully uploaded to GCS: {gcs_uri}")
 
         # Store GCS URI in session context
-        tool_context.state["generated_image_gcs_uri"] = gcs_uri
-
+        # Store GCS URI in session context
+        tool_context.state["generated_image_gcs_uri_"+ counter] = gcs_uri
+        
 
     except Exception as e_gcs:
         print(f"Error uploading image to GCS: {e_gcs}\n{traceback.format_exc()}")

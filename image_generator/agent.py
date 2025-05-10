@@ -1,4 +1,4 @@
-import datetime
+import datetime, uuid
 from zoneinfo import ZoneInfo
 from google.adk.agents import Agent
 from .sub_agents.prompt import image_generation_prompt_agent as image_prompt
@@ -9,9 +9,20 @@ from google.adk.sessions import InMemorySessionService
 #import checker_agent_instance
 from .checker_agent import checker_agent_instance
 from google.adk.agents import SequentialAgent, LoopAgent
+from google.adk.agents.callback_context import CallbackContext
+
 
 from vertexai.preview.reasoning_engines import AdkApp
 
+def set_session(callback_context: CallbackContext):
+    """
+    Sets a unique ID and timestamp in the callback context's state.
+    This function is called before the main_loop_agent executes.
+    """
+    
+    callback_context.state['unique_id'] = str(uuid.uuid4())
+    callback_context.state['timestamp'] = datetime.datetime.now(ZoneInfo("UTC")).isoformat()
+    print(f"Callback set_session: unique_id='{callback_context.state['unique_id']}', timestamp='{callback_context.state['timestamp']}'")
 
 llm_news_image_generation = SequentialAgent(
     name='image_generation_scoring_agent',
