@@ -16,7 +16,8 @@ from vertexai.preview.reasoning_engines import AdkApp
 llm_news_image_generation = SequentialAgent(
     name='image_generation_scoring_agent',
     description=(
-        'Analyzes a news article and creates the image generation prompt, generates the relevant images with imagen3 and scores the images.' 
+        'Analyzes a news article and creates the image generation prompt, generates the relevant images with imagen3 and scores the images.' \
+        'if the total_score is greater than 20 stop the execution' 
         
     ),
     sub_agents=[image_prompt, image_gen, scoring_prompt]

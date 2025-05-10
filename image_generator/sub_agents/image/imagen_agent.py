@@ -4,38 +4,34 @@ from PIL import Image
 from io import BytesIO
 from google.adk.agents import Agent
 from google.adk.tools import ToolContext 
-from scoring import get_rules
 import os,uuid,tempfile, traceback, json
 from datetime import datetime 
 from google.cloud import storage
 
 image_uris=[]
 client = genai.Client()
-def generate_images(prompt: str,  tool_context: ToolContext, aspect_ratio: str):
+def generate_images(prompt: str,  tool_context: ToolContext):
 
     try:
-        rules = get_rules(tool_context)
-        aspect_ratio_from_rules = rules['image_specifications']['aspect_ratio']
         
         response = client.models.generate_images(
             model='imagen-3.0-generate-002',
             prompt=prompt,
             config=types.GenerateImagesConfig(
                 number_of_images= 1,
-                aspect_ratio=aspect_ratio_from_rules,
-                safety_filter_level="block_some",
+                aspect_ratio='9:16',
+                safety_filter_level="block_low_and_above",
                 person_generation="allow_adult"
                
             )     
         )
-    
         generated_image_paths = [] 
         if response.generated_images is not None:
             for generated_image in response.generated_images:
                     # Get the image bytes
                 image_bytes = generated_image.image.image_bytes  
             
-                artifact_name = f"generated_image_"+ tool_context.state.get('loop_iteration', 0) + ".png"
+                artifact_name = f"generated_image_"+ str(tool_context.state.get('loop_iteration', 0)) + ".png"
                 # call save to gcs function
                 save_to_gcs(tool_context, image_bytes, artifact_name)
                 
@@ -52,7 +48,6 @@ def generate_images(prompt: str,  tool_context: ToolContext, aspect_ratio: str):
                 return {
                     'status': 'success',
                     'message': f'Image generated and saved to GCS. ADK artifact: {artifact_name}.',
-                    'gcs_uri': gcs_uri, # Include GCS URI in the tool's direct output
                     'artifact_name': artifact_name
                 }
         else:

@@ -20,8 +20,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 policy_file_path = os.path.join(script_dir, 'policy.json')
 
 def get_image(tool_context: ToolContext):
-  
-  artifact  = tool_context.load_artifact("generated_image.png")
+  artifact_name = f"generated_image_"+ str(tool_context.state.get('loop_iteration', 0)) + ".png"
+  artifact  = tool_context.load_artifact(artifact_name)
   print(f' gcs image uri: {tool_context.state.get('generated_image_gcs_uri')}')
   metadata = {}
  
@@ -33,7 +33,7 @@ def get_image(tool_context: ToolContext):
       metadata['size'] = image.size
       metadata['mode'] = image.mode
       metadata['format'] = image.format
-      metadata['info'] = str(image.info)
+      #metadata['info'] = str(image.info)
       
 
       # The image is loaded into the context by load_artifact.
@@ -86,6 +86,7 @@ def convert_to_pdf(
     return llm_response
 
 def set_score(tool_context: ToolContext, total_score: int) -> str:
+   print(f'total scoreeee is {total_score}')
    tool_context.state['total_score'] = total_score
 
    
@@ -97,25 +98,21 @@ scoring_images_prompt = Agent(
     description=(
         "You are an expert in evaluating and scoring images based on various criteria provided to you"
     ),
-    instruction=(
-        # 1. Instruct the LLM to get the image first
-        "First, invoke the 'get_rules' tool to obtain the 'rules' in JSON format. "
-        # 2. Instruct the LLM to get the rules
-        "Next, invoke the 'get_image' tool to load the images artifact and image_metadata. Do not try to generate the image, just invoke the get_image function to get the image." 
-        # "Pass the counter variable as 1 during first invocation, 2 during second invocation and so on."
-        # 3. Instruct the LLM to perform the scoring using the loaded image and rules
-        "Now,  the image made available by the 'get_image' tool and the rules from 'get_rules', "
-        "score  the image based on its compliance with each rule criterion. "
-        "Evaluate the image against each criterion mentioned in the JSON string. "
-        "Assign a score of 5 if the image complies with a specific criterion, else assign a score of 1. "
+  instruction=(
+      "Your task is to evaluate an image based on a set of scoring rules. Follow these steps precisely:"
+        "1.  First, invoke the 'get_rules' tool to obtain the image scoring 'rules' in JSON format"
+        "2.  Next, invoke the 'get_image' tool to load the images artifact and image_metadata. Do not try to generate the image"
+        "3.  Carefully examine the rules in JSON string obtained in step 1. For EACH rule described within this JSON string:"
+        "    a.  Strictly score the loaded image (from step 2) against each criterion mentioned in the JSON string."
+        "    b.  Assign a score in a scale of 0 to 5: 5 points if the image complies with a specific criterion, or 0 point if it does not." \
+             "Also specify the reason in a seperate attribute explaining the reason for assigning thew score"
         "Do not validate the JSON structure itself; only use its content for scoring rules. "
-        # 4. Specify the output format
-        "OUTPUT: The output must be strictly in JSON format. It should have array with three attributes: "
-        "'Scoring Criteria', 'Score', and 'Reason' (explaining why a specific score was assigned)."
-        "It should have an attribute called total_score which is the sum of the score " \
-        "OUTPUT JSON FORMAT : { 'total_score': 10, 'scores': ['Scoring Criteria': 'crieteria', 'Score' : 5 , 'Reason': ' some Reason']}"
-        "Invoke the 'set_score' tool by passing the total_score"
-    ),
+       
+        "OUTPUT JSON FORMAT SPECIFICATION:\n"
+        "The JSON object MUST have exactly two top-level keys:"
+        "  - 'total_score': Iterate through each individual score element in the json and add those to arrive at total_score. "
+        "  - 'scores': The existing rules json with a score attribute assigned to each rule and a reason attribute"
+      ),
     output_key="scoring",
     tools=[get_rules, get_image, set_score],
     after_model_callback=convert_to_pdf

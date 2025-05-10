@@ -12,7 +12,7 @@ def check_condition_and_escalate_tool(tool_context: ToolContext) -> dict:
     tool_context.state['loop_iteration'] = current_loop_count # Update state [3]
 
     # Define maximum iterations
-    max_iterations = 3
+    max_iterations = 2
 
     # Get the condition result set by the sequential agent from state [3]
     total_score = tool_context.state.get('total_score', False)
