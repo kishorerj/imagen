@@ -98,8 +98,7 @@ image_generation_agent = Agent(
         "You are an expert in creating images with imagen 3"
     ),
     instruction=(
-        "Invoke the 'generate_images' tool by passing the prompt in the 'imagen_prompts' variable as the prompt." \
-        "If an exception or error occurs during image generation inform the user  and stop the execution." 
+        "Invoke the 'generate_images' tool by passing the prompt in the 'imagen_prompts' variable as the prompt." 
     
     
     ),

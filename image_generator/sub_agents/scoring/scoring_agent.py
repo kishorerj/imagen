@@ -107,6 +107,8 @@ scoring_images_prompt = Agent(
         "    b.  Assign a score in a scale of 0 to 5: 5 points if the image complies with a specific criterion, or 0 point if it does not." \
              "Also specify the reason in a seperate attribute explaining the reason for assigning thew score"
         "Do not validate the JSON structure itself; only use its content for scoring rules. "
+        "4. Compute the total_score by adding each individual score point for each rule in the JSON "
+        "5. Invoke the set_score tool and pass the total_score. "
        
         "OUTPUT JSON FORMAT SPECIFICATION:\n"
         "The JSON object MUST have exactly two top-level keys:"
@@ -118,11 +120,5 @@ scoring_images_prompt = Agent(
     after_model_callback=convert_to_pdf
 )
 
-# loop_scoring_images_prompt = LoopAgent(
-#     name="loop_scoring_images_prompt",
-#     max_iterations=3,
-#     sub_agents=[scoring_images_prompt]
 
-
-# )
     
