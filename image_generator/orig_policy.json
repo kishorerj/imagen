@@ -1,0 +1,1015 @@
+
+{
+
+  "globalDefaults": {
+    "defaultResourceTemplate": "grn:glance:content:{regionId}:prod:lockscreen/wallpaper",
+    "defaultImageSpecs": {
+      "aspectRatio": "9:16",
+      "width": 1440,
+      "height": 2560,
+      "fileFormat": "jpg",
+      "resolutionDpi": 72,
+      "maxFileSizeKb": 550
+    },
+    "defaultVideoSpecs": {
+      "aspectRatio": "9:16",
+      "width": 1080,
+      "height": 1920,
+      "fileFormat": "mp4",
+      "maxDurationSec": 15,
+      "frameRateFps": 30,
+      "maxFileSizeMb": 5,
+      "codecType": "h264"
+    },
+    "defaultTextSpecs": {
+      "headlineMaxLength": 80,
+      "notificationMaxLength": 120,
+      "descriptionMaxLength": 300,
+      "format": "plain",
+      "encoding": "UTF-8"
+    },
+    "defaultCompositionStyle": "centered",
+    "defaultColorScheme": "natural",
+    "defaultImageTone": "vibrant",
+    "defaultOEM": "generic",
+    "defaultRegion": "global"
+  },
+  "mediaTypeDefinitions": {
+    "image": {
+      "typeId": "image",
+      "typeName": "Static Image",
+      "typeDescription": "Static visual content for lockscreen backgrounds",
+      "supportedFileFormats": ["jpg", "jpeg", "png"],
+      "technicalSpecifications": {
+        "aspectRatio": {
+          "value": "9:16",
+          "validation": {
+            "type": "string",
+            "pattern": "^[0-9]+:[0-9]+$",
+            "allowedValues": ["9:16", "9:19.5", "9:20"]
+          }
+        },
+        "dimensions": {
+          "width": {
+            "value": 1440,
+            "unit": "pixels",
+            "validation": {
+              "type": "integer",
+              "minimum": 1080,
+              "maximum": 1440
+            }
+          },
+          "height": {
+            "value": 2560,
+            "unit": "pixels",
+            "validation": {
+              "type": "integer",
+              "minimum": 1920,
+              "maximum": 3200
+            }
+          }
+        },
+        "fileFormat": {
+          "value": "jpg",
+          "validation": {
+            "type": "string",
+            "allowedValues": ["jpg", "jpeg", "png"]
+          }
+        },
+        "resolution": {
+          "value": 72,
+          "unit": "dpi",
+          "validation": {
+            "type": "integer",
+            "minimum": 72,
+            "maximum": 300
+          }
+        },
+        "maxFileSize": {
+          "value": 550,
+          "unit": "kb",
+          "validation": {
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 550
+          }
+        },
+        "colorSpace": {
+          "value": "sRGB",
+          "validation": {
+            "type": "string",
+            "allowedValues": ["sRGB", "AdobeRGB"]
+          }
+        }
+      },
+      "contentGuidelines": {
+        "generalPrinciples": [
+          "Images should have a premium, high-quality appearance",
+          "Content must be appropriate for all audiences",
+          "UI elements should remain visible against the image",
+          "Composition should focus on a clear main subject",
+          "Colors should be harmonious and visually appealing"
+        ],
+        "imageGenerationDirectives": {
+          "positiveAttributes": [
+            "highResolution",
+            "premiumQuality",
+            "photorealistic",
+            "detailed",
+            "professional",
+            "highFidelity",
+            "9:16AspectRatio",
+            "portraitOrientation",
+            "mobileLockscreen",
+            "cleanComposition",
+            "uncluttered",
+            "naturalLighting",
+            "softLighting",
+            "professionalLighting",
+            "balancedExposure",
+            "optimalContrast",
+            "natural",
+            "authentic",
+            "premiumLooking",
+            "professional",
+            "magazineQuality",
+            "commercialGrade"
+          ],
+          "negativeAttributes": [
+            "lowQuality",
+            "pixelated",
+            "blurry",
+            "noisy",
+            "grainy",
+            "distorted",
+            "artifacts",
+            "cartoon",
+            "anime",
+            "sketch",
+            "flatVector",
+            "clipart",
+            "illustration",
+            "3DRender",
+            "grunge",
+            "distressed",
+            "vintageFilter",
+            "heavyVignette",
+            "overprocessedHDR",
+            "neon",
+            "oversaturated",
+            "acidColors",
+            "unnaturallyBright",
+            "garish",
+            "clashingColors"
+          ]
+        }
+      },
+      "validationRules": {
+        "enforceTechnicalSpecs": true,
+        "validateImageQuality": true,
+        "minimumQualityScore": 0.75,
+        "detectArtifacts": true,
+        "detectProhibitedContent": true,
+        "validateUICompatibility": true,
+        "validateComposition": true,
+        "validateColorUsage": true
+      }
+    },
+    "video": {
+      "typeId": "video",
+      "typeName": "Motion Video",
+      "typeDescription": "Short video content for dynamic lockscreen backgrounds",
+      "supportedFileFormats": ["mp4", "mov"],
+      "technicalSpecifications": {
+        "aspectRatio": {
+          "value": "9:16",
+          "validation": {
+            "type": "string",
+            "pattern": "^[0-9]+:[0-9]+$",
+            "allowedValues": ["9:16", "9:19.5", "9:20"]
+          }
+        },
+        "dimensions": {
+          "width": {
+            "value": 1080,
+            "unit": "pixels",
+            "validation": {
+              "type": "integer",
+              "minimum": 720,
+              "maximum": 1080
+            }
+          },
+          "height": {
+            "value": 1920,
+            "unit": "pixels",
+            "validation": {
+              "type": "integer",
+              "minimum": 1280,
+              "maximum": 1920
+            }
+          }
+        },
+        "fileFormat": {
+          "value": "mp4",
+          "validation": {
+            "type": "string",
+            "allowedValues": ["mp4", "mov"]
+          }
+        },
+        "codec": {
+          "value": "h264",
+          "validation": {
+            "type": "string",
+            "allowedValues": ["h264", "h265"]
+          }
+        },
+        "frameRate": {
+          "value": 30,
+          "unit": "fps",
+          "validation": {
+            "type": "integer",
+            "minimum": 24,
+            "maximum": 30
+          }
+        },
+        "maxDuration": {
+          "value": 15,
+          "unit": "seconds",
+          "validation": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 15
+          }
+        },
+        "maxFileSize": {
+          "value": 5,
+          "unit": "mb",
+          "validation": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "bitRate": {
+          "value": 2.5,
+          "unit": "mbps",
+          "validation": {
+            "type": "number",
+            "minimum": 1.0,
+            "maximum": 2.5
+          }
+        },
+        "looping": {
+          "value": true,
+          "validation": {
+            "type": "boolean",
+            "allowedValues": [true]
+          }
+        }
+      },
+      "contentGuidelines": {
+        "generalPrinciples": [
+          "Videos should have subtle, elegant motion that isn't distracting",
+          "Content must be appropriate for all audiences",
+          "UI elements should remain visible throughout the video",
+          "Composition should maintain focus on a clear main subject",
+          "Motion should be smooth and professional",
+          "Video should be designed to loop seamlessly",
+          "Battery optimization should be considered in visual complexity"
+        ],
+        "videoGenerationDirectives": {
+          "positiveAttributes": [
+            "subtleMotion",
+            "elegantMovement",
+            "seamlessLoop",
+            "smoothTransitions",
+            "gentleAnimation",
+            "professionallyShot",
+            "stabilizedFootage",
+            "premiumQuality",
+            "highFidelity",
+            "9:16AspectRatio",
+            "portraitOrientation",
+            "mobileLockscreen",
+            "cleanComposition",
+            "uncluttered",
+            "naturalLighting",
+            "softLighting",
+            "professionalLighting",
+            "balancedExposure",
+            "optimalContrast"
+          ],
+          "negativeAttributes": [
+            "rapidMovement",
+            "jarringTransitions",
+            "fastMotion",
+            "flickeringElements",
+            "strobeEffects",
+            "shakyCamerawork",
+            "lowQuality",
+            "pixelated",
+            "compression artifacts",
+            "noisy",
+            "grainy",
+            "distorted",
+            "cartoon",
+            "anime",
+            "3DRender",
+            "grunge",
+            "distressed",
+            "vintageFilter",
+            "heavyVignette",
+            "overprocessedHDR",
+            "neon",
+            "oversaturated",
+            "acidColors",
+            "unnaturallyBright",
+            "garish",
+            "clashingColors"
+          ]
+        }
+      },
+      "validationRules": {
+        "enforceTechnicalSpecs": true,
+        "validateVideoQuality": true,
+        "minimumQualityScore": 0.75,
+        "detectArtifacts": true,
+        "detectProhibitedContent": true,
+        "validateUICompatibility": true,
+        "validateComposition": true,
+        "validateColorUsage": true,
+        "validateMotionCharacteristics": true,
+        "validateLooping": true,
+        "checkBatteryImpact": true
+      }
+    },
+    "text": {
+      "typeId": "text",
+      "typeName": "Textual Content",
+      "typeDescription": "Text content for headlines, notifications, and descriptions",
+      "supportedFileFormats": ["txt", "json"],
+      "technicalSpecifications": {
+        "headlineLength": {
+          "value": 80,
+          "unit": "characters",
+          "validation": {
+            "type": "integer",
+            "minimum": 10,
+            "maximum": 80
+          }
+        },
+        "notificationLength": {
+          "value": 120,
+          "unit": "characters",
+          "validation": {
+            "type": "integer",
+            "minimum": 10,
+            "maximum": 120
+          }
+        },
+        "descriptionLength": {
+          "value": 300,
+          "unit": "characters",
+          "validation": {
+            "type": "integer",
+            "minimum": 10,
+            "maximum": 300
+          }
+        },
+        "encoding": {
+          "value": "UTF-8",
+          "validation": {
+            "type": "string",
+            "allowedValues": ["UTF-8"]
+          }
+        },
+        "format": {
+          "value": "plain",
+          "validation": {
+            "type": "string",
+            "allowedValues": ["plain", "markdown", "html"]
+          }
+        },
+        "supportedScripts": {
+          "value": ["Latin", "Devanagari", "Arabic", "Cyrillic", "Thai", "Japanese"],
+          "validation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "contentGuidelines": {
+        "generalPrinciples": [
+          "Text should be concise and impactful",
+          "Content must be appropriate for all audiences",
+          "Headlines should be attention-grabbing but accurate",
+          "Avoid clickbait, misleading claims, or sensationalism",
+          "Text should be easily readable on mobile devices",
+          "Grammar and spelling must be correct",
+          "Regional language considerations must be respected"
+        ],
+        "textGenerationDirectives": {
+          "positiveAttributes": [
+            "concise",
+            "clear",
+            "impactful",
+            "engaging",
+            "accurateHeadline",
+            "properGrammar",
+            "correctSpelling",
+            "culturallyAppropriate",
+            "readableOnMobile",
+            "interestGenerating",
+            "informative",
+            "wellStructured"
+          ],
+          "negativeAttributes": [
+            "clickbait",
+            "misleading",
+            "exaggerated",
+            "sensationalized",
+            "confusing",
+            "vague",
+            "grammaticalErrors",
+            "spellingErrors",
+            "culturallyInsensitive",
+            "overlyComplex",
+            "unnecessarilyLong",
+            "jargonHeavy",
+            "technicallyConfusing"
+          ]
+        },
+        "contentTypes": {
+          "headline": {
+            "description": "Primary text visible on lockscreen",
+            "purpose": "To capture attention and convey key information",
+            "bestPractices": [
+              "Use strong action verbs",
+              "Be specific and clear",
+              "Focus on main value proposition",
+              "Create curiosity when appropriate",
+              "Use numbers when relevant"
+            ]
+          },
+          "notification": {
+            "description": "Secondary text for notifications",
+            "purpose": "To provide additional context or details",
+            "bestPractices": [
+              "Elaborate on headline without repeating",
+              "Include key supporting details",
+              "Use natural, conversational language",
+              "Maintain consistent tone with headline",
+              "Include call to action when appropriate"
+            ]
+          },
+          "description": {
+            "description": "Longer form content visible after engagement",
+            "purpose": "To provide complete information after user engagement",
+            "bestPractices": [
+              "Expand on headline promise with substance",
+              "Structure with clear paragraphs",
+              "Use subheadings for scannability",
+              "Include all relevant details",
+              "End with clear next steps when applicable"
+            ]
+          }
+        }
+      },
+      "validationRules": {
+        "enforceTechnicalSpecs": true,
+        "validateTextQuality": true,
+        "checkGrammarAndSpelling": true,
+        "detectProhibitedContent": true,
+        "validateCulturalApproprieness": true,
+        "validateAccuracy": true,
+        "checkClickbaitPatterns": true,
+        "validateReadability": {
+          "enabled": true,
+          "maxFleschKincaidGradeLevel": 8,
+          "minFleschReadingEase": 60
+        }
+      }
+    }
+  },
+  "uiLayoutSpecifications": {
+    "layoutDescription": "User interface specifications for different OEMs affecting content placement",
+    "globalConsiderations": {
+      "clockVisibility": {
+        "description": "Requirements for ensuring clock visibility against content",
+        "rules": [
+          "Maintain adequate spacing between clock and image subjects",
+          "Ensure sufficient contrast between clock text and background",
+          "Avoid placing important elements in clock display area"
+        ],
+        "validationCriteria": {
+          "contrastRatioValues": [4.5, 7.0],
+          "avoidBackgroundColors": [
+            "#FFFFFF", "#F5F5F5", "#FAFAFA", "#FCFCFC", "#F8F8F8"
+          ]
+        }
+      },
+      "notificationArea": {
+        "description": "Areas that should remain uncluttered for notifications",
+        "rules": [
+          "Keep top portion relatively clear",
+          "Avoid complex patterns in notification areas",
+          "Ensure adequate contrast for notification text"
+        ]
+      },
+      "safeZones": {
+        "description": "Areas that should be kept free of important content to prevent cropping",
+        "zonePercentages": {
+          "top": 25,
+          "bottom": 15,
+          "left": 5,
+          "right": 5
+        }
+      }
+    }
+  },
+  "compositionStyles": {
+      "centered": {
+        "styleId": "centered",
+        "styleName": "Centered Composition",
+        "description": "Places the main subject in the middle of the frame for balance and focus",
+        "appropriateUseContexts": ["portraits", "single objects", "formal settings", "product showcases"],
+        "visualEffect": "Creates focus, stability, and visual weight with clear focal point",
+        "bestPractices": [
+          "Ensure adequate space around the subject",
+          "Avoid cluttering the composition",
+          "Maintain symmetry where appropriate"
+        ],
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create a center-composed image with main subject in middle of frame",
+            "Design a balanced composition with central subject framed adequately",
+            "Generate an image with clear subject centered with visual weight",
+            "Compose a symmetrical image with primary focus exactly in center"
+          ],
+          "negativeConsiderations": [
+            "Avoid cluttering the center composition with competing elements",
+            "Don't create imbalanced composition when using center positioning",
+            "Avoid distracting elements that draw attention from centered subject"
+          ],
+          "exampleDescriptions": [
+            "Majestic tiger standing centered against natural backdrop",
+            "Premium smartphone placed center frame on minimalist surface",
+            "Centered portrait with space above for clock UI element"
+          ]
+        },
+        "validationCriteria": {
+          "subjectCenteredness": {
+            "type": "score",
+            "minimum": 0.7
+          },
+          "balanceScore": {
+            "type": "score",
+            "minimum": 0.75
+          }
+        }
+      },
+      "horizontalLine": {
+        "styleId": "horizontalLine",
+        "styleName": "Horizontal Line Composition",
+        "description": "Uses parallel horizontal lines to create structure, stability, and sense of calm",
+        "appropriateUseContexts": ["landscapes", "horizons", "architectural features", "layered scenes"],
+        "visualEffect": "Creates stability, calmness, width, and visual depth through horizontal layering",
+        "bestPractices": [
+          "Keep horizon lines straight and properly positioned",
+          "Balance elements above and below the line",
+          "Use rule of thirds for horizon placement when appropriate"
+        ],
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create an image with strong horizontal lines dividing the composition",
+            "Design a landscape with clear, straight horizon line using rule of thirds",
+            "Generate a serene scene with parallel horizontal elements creating depth",
+            "Compose an image where horizontal structures create stability and calmness"
+          ],
+          "negativeConsiderations": [
+            "Avoid tilted or uneven horizon lines causing imbalance",
+            "Don't place distracting elements that interrupt horizontal flow",
+            "Avoid busy arrangements undermining the horizontal structure"
+          ],
+          "exampleDescriptions": [
+            "Calm beach scene with straight horizon line in lower third",
+            "Layered landscape with horizontal bands of mountains, forest, meadow",
+            "Architectural composition featuring horizontal structural elements"
+          ]
+        },
+        "validationCriteria": {
+          "horizontalAlignment": {
+            "type": "score",
+            "minimum": 0.8
+          },
+          "horizontalEmphasisScore": {
+            "type": "score",
+            "minimum": 0.7
+          }
+        }
+      },
+      "verticalLine": {
+        "styleId": "verticalLine",
+        "styleName": "Vertical Line Composition",
+        "description": "Uses vertical lines to create sense of height, power, and upward movement",
+        "appropriateUseContexts": ["architecture", "portraits", "formal compositions", "growth narratives"],
+        "visualEffect": "Creates sense of height, power, elegance, and upward aspiration",
+        "bestPractices": [
+          "Ensure vertical lines are truly vertical without distortion",
+          "Use to guide eye upward through the composition",
+          "Balance with subtle horizontal elements when needed"
+        ],
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create an image with strong vertical lines drawing the eye upward",
+            "Design a composition where vertical elements create height and grandeur",
+            "Generate a scene with vertical structural lines conveying strength",
+            "Compose an image where vertical flow creates elegant upward movement"
+          ],
+          "negativeConsiderations": [
+            "Avoid distorted vertical lines that appear to bend or tilt",
+            "Don't create conflicting directional flows undermining vertical emphasis",
+            "Avoid cluttering the vertical composition with distracting horizontal elements"
+          ],
+          "exampleDescriptions": [
+            "Majestic skyscraper shot from ground level with strong vertical lines",
+            "Tall waterfall flowing downward creating natural vertical composition",
+            "Portrait of person standing tall with vertical posture against simple background"
+          ]
+        },
+        "validationCriteria": {
+          "verticalAlignment": {
+            "type": "score",
+            "minimum": 0.8
+          },
+          "verticalEmphasisScore": {
+            "type": "score",
+            "minimum": 0.7
+          }
+        }
+      },
+      "symmetrical": {
+        "styleId": "symmetrical",
+        "styleName": "Symmetrical Composition",
+        "description": "Arranges visual elements in mirrored way for formal harmony and stability",
+        "appropriateUseContexts": ["formal settings", "architecture", "portraits", "product displays"],
+        "visualEffect": "Creates harmony, order, stability, and sense of intentional design",
+        "bestPractices": [
+          "Ensure precise alignment of elements on both sides",
+          "Maintain perfect balance across central axis",
+          "Use for formal, structured visual presentations"
+        ],
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create a perfectly symmetrical image with balanced elements on both sides",
+            "Design a composition where left and right sides mirror each other",
+            "Generate a scene with reflective symmetry creating perfect order",
+            "Compose an image with balanced visual weight distributed evenly"
+          ],
+          "negativeConsiderations": [
+            "Avoid asymmetrical elements disrupting the balanced composition",
+            "Don't include random objects breaking the symmetrical harmony",
+            "Avoid uneven lighting creating imbalance between mirrored sides"
+          ],
+          "exampleDescriptions": [
+            "Perfectly symmetrical architectural facade viewed head-on",
+            "Reflection of mountains in still lake creating natural symmetry",
+            "Portrait composed with perfect bilateral symmetry against simple background"
+          ]
+        },
+        "validationCriteria": {
+          "symmetryScore": {
+            "type": "score",
+            "minimum": 0.85
+          },
+          "balanceScore": {
+            "type": "score",
+            "minimum": 0.85
+          }
+        }
+      },
+      "diagonal": {
+        "styleId": "diagonal",
+        "styleName": "Diagonal Composition",
+        "description": "Arranges elements along diagonal line for energy, movement, and visual interest",
+        "appropriateUseContexts": ["dynamic scenes", "action shots", "modern compositions", "creative photography"],
+        "visualEffect": "Adds movement, dynamism, tension, and contemporary energy",
+        "bestPractices": [
+          "Use strong diagonal lines guiding eye through frame from corner to corner",
+          "Create clear directional flow along the diagonal",
+          "Balance with subtle opposing elements when needed"
+        ],
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create a dynamic composition with strong diagonal line from corner to corner",
+            "Design an image with elements arranged along diagonal for visual energy",
+            "Generate a scene with clear diagonal movement guiding eye through frame",
+            "Compose an image where diagonal elements create sense of motion"
+          ],
+          "negativeConsiderations": [
+            "Avoid competing diagonal lines pointing in conflicting directions",
+            "Don't create chaotic arrangements lacking clear diagonal structure",
+            "Avoid elements that interrupt the flow of main diagonal"
+          ],
+          "exampleDescriptions": [
+            "Athlete in motion creating dynamic diagonal line across frame",
+            "Modern architectural detail shot from angle creating strong diagonal",
+            "Natural landscape with winding path cutting diagonally through scene"
+          ]
+        },
+        "validationCriteria": {
+          "diagonalEmphasisScore": {
+            "type": "score",
+            "minimum": 0.75
+          },
+          "dynamismScore": {
+            "type": "score",
+            "minimum": 0.7
+          }
+        }
+      },
+      "leadingLine": {
+        "styleId": "leadingLine",
+        "styleName": "Leading Line Composition",
+        "description": "Uses visual lines to guide viewer's eye through scene in intentional journey",
+        "appropriateUseContexts": ["landscapes", "architecture", "storytelling images", "journey narratives"],
+        "visualEffect": "Creates flow, direction, narrative, and visual journey through composition",
+        "bestPractices": [
+          "Use natural lines (roads, paths, building edges) to guide eye to key focal points",
+          "Create clear visual path through the image",
+          "Ensure lines lead to important elements rather than off-frame"
+        ],
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create an image with visual lines naturally guiding viewer's eye through composition",
+            "Design a scene where pathways, edges, or elements create directional flow",
+            "Generate a composition where leading lines direct attention to main subject",
+            "Compose an image with subtle visual cues creating narrative journey"
+          ],
+          "negativeConsiderations": [
+            "Avoid confusing visual pathways leading nowhere or off frame",
+            "Don't create competing leading lines pointing to different focal points",
+            "Avoid cluttered scenes where guideline elements are obstructed"
+          ],
+          "exampleDescriptions": [
+            "Winding road leading from foreground to mountain peak in distance",
+            "Natural stream flowing through landscape guiding eye to focal point",
+            "Architectural corridor with converging lines leading to central feature"
+          ]
+        },
+        "validationCriteria": {
+          "leadingLineStrength": {
+            "type": "score",
+            "minimum": 0.7
+          },
+          "visualFlowClarity": {
+            "type": "score",
+            "minimum": 0.75
+          }
+        }
+      }
+  },
+ 
+  "colorSchemeDefinitions": {
+    "schemeDescription": "Standards for color usage, combinations, and schemes in lockscreen content",
+    "globalConsiderations": {
+      "generalRules": [
+        "Ensure sufficient contrast for UI element visibility",
+        "Avoid eye-straining color combinations",
+        "Create harmonious color relationships",
+        "Consider clock and notification text visibility",
+        "Prefer natural, balanced color palettes"
+      ],
+      "qualityIndicators": {
+        "colorHarmony": "Colors work well together in intended scheme",
+        "uiCompatibility": "Colors allow for clear visibility of UI elements",
+        "visualAppeal": "Colors create aesthetically pleasing visual experience"
+      }
+    },
+    "colorSchemes": {
+      "monochrome": {
+        "schemeId": "monochrome",
+        "schemeName": "Monochromatic Color Scheme",
+        "description": "Uses variations of single color to create cohesive, sophisticated look with depth",
+        "appropriateUseContexts": ["elegant designs", "minimalist aesthetics", "premium brand looks", "subtle backgrounds"],
+        "visualEffect": "Creates cohesive, harmonious look with depth through tonal variation",
+        "bestPractices": [
+          "Use sufficient variation in lightness/darkness for visual interest",
+          "Maintain color unity while providing enough contrast",
+          "Consider using subtle neutral accents when needed"
+        ],
+        "detailedDescription": "A monochrome scheme uses a single color with variations in shade, tone, and tint to create a cohesive and harmonious composition. This technique focuses on variations in hue, saturation, and lightness within the same color family to achieve depth, contrast, and visual interest while maintaining a unified appearance. Monochrome images often evoke specific moods such as calmness, elegance, or nostalgia through the subtle interplay of light and shadow.",
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create a sophisticated monochrome image using variations of blue from navy to pale blue",
+            "Design an elegant composition using only shades of green from forest to mint",
+            "Generate a premium-looking monochromatic scene with rich tonal variations",
+            "Compose an image with subtle tonal variations from darkest to lightest values"
+          ],
+          "negativeConsiderations": [
+            "Avoid flat monochrome with insufficient tonal variation",
+            "Don't mix in colors outside the chosen monochrome palette",
+            "Avoid excessively dark monochrome that could obscure UI elements"
+          ],
+          "exampleDescriptions": [
+            "Serene ocean scene in varied blues from deep navy to pale cyan",
+            "Architectural detail showcased in elegant gradations of warm gray",
+            "Natural landscape rendered in harmonious shades of forest green"
+          ]
+        },
+        "validationCriteria": {
+          "monochromeAdherence": {
+            "type": "score",
+            "minimum": 0.85
+          },
+          "tonalVariation": {
+            "type": "score",
+            "minimum": 0.7
+          }
+        }
+      },
+      "analogous": {
+        "schemeId": "analogous",
+        "schemeName": "Analogous Color Scheme",
+        "description": "Uses colors adjacent on color wheel for harmonious variation with clear relationship",
+        "appropriateUseContexts": ["natural scenes", "harmonious designs", "subtle variations", "gentle transitions"],
+        "visualEffect": "Creates cohesive impression with gentle color transitions that feel natural",
+        "bestPractices": [
+          "Select colors that are neighbors on the color wheel",
+          "Use one color as dominant with others as support",
+          "Limit selection to 2-3 adjacent colors for cohesiveness"
+        ],
+        "detailedDescription": "Analogous color schemes use colors that are next to each other on the color wheel to create harmony and cohesion. This approach typically uses one dominant color with its neighbors as accents, producing a visually pleasing effect because these colors naturally complement each other without stark contrast. Examples include blue-green-teal or red-orange-yellow combinations.",
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create an image using similar colors like blue-green, teal, and turquoise",
+            "Design a composition with a family of warm colors: amber, orange, and gold",
+            "Generate a scene with closely related purple tones: lavender, lilac, and violet",
+            "Compose an image with analogous colors like yellow-green, yellow, and yellow-orange"
+          ],
+          "negativeConsiderations": [
+            "Avoid introducing colors that break the analogous harmony",
+            "Don't create harsh transitions between the similar colors",
+            "Avoid oversaturating the similar colors creating an artificial look"
+          ],
+          "exampleDescriptions": [
+            "Tranquil landscape using analogous blues and greens for harmonious feel",
+            "Sunset scene with harmonious warm tones from amber to soft red",
+            "Nature composition with yellow-green, green, and blue-green elements"
+          ]
+        },
+        "validationCriteria": {
+          "analogousAdherence": {
+            "type": "score",
+            "minimum": 0.8
+          },
+          "colorHarmony": {
+            "type": "score",
+            "minimum": 0.75
+          }
+        }
+      },
+      "complementary": {
+        "schemeId": "complementary",
+        "schemeName": "Complementary Color Scheme",
+        "description": "Uses colors opposite on color wheel to create vibrant contrast and visual energy",
+        "appropriateUseContexts": ["high-contrast designs", "vibrant compositions", "dramatic scenes", "attention-grabbing imagery"],
+        "visualEffect": "Creates dynamic contrast with each color appearing more vibrant when paired with opposite",
+        "bestPractices": [
+          "Balance complementary colors carefully to avoid visual conflict",
+          "Use one as dominant and one as accent for best results",
+          "Consider using tints and shades of the complementary colors"
+        ],
+        "detailedDescription": "Complementary color schemes pair colors from opposite sides of the color wheel, creating high contrast and vibrant compositions. When these opposing colors are placed together, they make each other appear more intense. Common complementary pairs include blue-orange, red-green, and yellow-purple. This scheme creates dynamic, energetic visuals with strong visual tension.",
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create an image using complementary colors blue and orange for vibrant contrast",
+            "Design a composition with opposite colors red and green for dynamic energy",
+            "Generate a scene with complementary colors purple and yellow for bold impact",
+            "Compose an image where complementary colors create intentional visual tension"
+          ],
+          "negativeConsiderations": [
+            "Avoid equal proportions of complementary colors creating visual vibration",
+            "Don't oversaturate both complementary colors creating harsh contrast",
+            "Avoid clashing complementary combinations that compete for attention"
+          ],
+          "exampleDescriptions": [
+            "Dramatic sunset with orange sky against blue water",
+            "Composed still life with red elements against green background",
+            "Vibrant scene with purple flowers against yellow background"
+          ]
+        },
+        "validationCriteria": {
+          "complementaryAdherence": {
+            "type": "score",
+            "minimum": 0.8
+          },
+          "contrastBalance": {
+            "type": "score",
+            "minimum": 0.7
+          }
+        }
+      },
+      "blackAndWhite": {
+        "schemeId": "blackAndWhite",
+        "schemeName": "Black and White Scheme",
+        "description": "Uses only black, white, and grays to create timeless, classic imagery focusing on form",
+        "appropriateUseContexts": ["classic designs", "timeless aesthetics", "form-focused imagery", "emotional photography"],
+        "visualEffect": "Emphasizes contrasts, textures, and tonal ranges for timeless aesthetic",
+        "bestPractices": [
+          "Ensure sufficient contrast for visual interest",
+          "Focus on shapes, textures, and lighting",
+          "Create rich tonal range from pure black to pure white"
+        ],
+        "detailedDescription": "Black and white (grayscale) imagery removes color to focus attention on composition, form, contrast, and texture. This classic approach creates timeless visuals that emphasize the essential elements of an image without the potential distraction of color. Successful black and white images have rich tonal range from deep blacks to bright whites with nuanced grays.",
+        "oemSpecificRules": {
+          "oppo": "Requires slight color tinting rather than pure black and white",
+          "vivo": "Requires slight color tinting rather than pure black and white",
+          "transsion": "Requires slight color tinting rather than pure black and white"
+        },
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create a high-contrast black and white image with deep blacks and clean whites",
+            "Design a monochromatic composition focusing on form and dramatic lighting",
+            "Generate a timeless black and white scene with rich midtones and depth",
+            "Compose a grayscale image with attention to subtle tonal gradations"
+          ],
+          "oemSpecificConsiderations": {
+            "oppoVivoTranssion": [
+              "Create predominantly black and white image with subtle blue toning",
+              "Design grayscale composition with one selective color element",
+              "Generate black and white scene with gentle color wash overlay"
+            ]
+          },
+          "negativeConsiderations": [
+            "Avoid flat black and white with insufficient contrast or tonal range",
+            "Don't create muddy grayscale with indistinct transitions between tones",
+            "Avoid harsh black and white with no midtones or gradation"
+          ],
+          "exampleDescriptions": [
+            "Dramatic architectural detail in high-contrast black and white",
+            "Portrait with rich tonal range from deep black to bright white",
+            "Landscape scene in grayscale with foggy atmospheric depth"
+          ]
+        },
+        "validationCriteria": {
+          "blackAndWhiteAdherence": {
+            "type": "score",
+            "minimum": 0.85
+          },
+          "tonalRange": {
+            "type": "score",
+            "minimum": 0.75
+          },
+          "oemCompliance": {
+            "type": "boolean",
+            "value": true
+          }
+        }
+      },
+      "natural": {
+        "schemeId": "natural",
+        "schemeName": "Natural Color Scheme",
+        "description": "Uses colors found in nature with balanced saturation and harmonious relationships",
+        "appropriateUseContexts": ["landscapes", "realistic scenes", "organic subjects", "balanced compositions"],
+        "visualEffect": "Creates authentic, balanced visual experience with colors that feel organic",
+        "bestPractices": [
+          "Base palette on colors commonly found together in nature",
+          "Maintain natural color relationships and saturation levels",
+          "Create balance between warm and cool tones when appropriate"
+        ],
+        "detailedDescription": "Natural color schemes draw inspiration from colors found together in nature, creating harmonious, balanced compositions that feel authentic and organic. These palettes typically have moderate saturation levels and intuitive color relationships that human eyes find pleasing because they reflect the natural world. Examples include forest greens with earth browns, sky blues with cloud whites, or sunset oranges with ocean blues.",
+        "contentGenerationDirectives": {
+          "positiveConsiderations": [
+            "Create an image with natural, organic color palette inspired by landscapes",
+            "Design a composition with balanced natural colors at realistic saturation levels",
+            "Generate a scene with authentic color relationships found in nature",
+            "Compose an image with harmonious natural tones that feel balanced and realistic"
+          ],
+          "negativeConsiderations": [
+            "Avoid artificial-looking colors not commonly found in nature",
+            "Don't oversaturate beyond levels typically seen in natural environments",
+            "Avoid unnatural color combinations that clash or feel synthetic"
+          ],
+          "exampleDescriptions": [
+            "Forest scene with natural greens, browns and subtle highlights",
+            "Coastal landscape with authentic blues, tans, and soft whites",
+            "Mountain vista with realistic earth tones and atmospheric blues"
+          ]
+        },
+        "validationCriteria": {
+          "naturalColorAdherence": {
+            "type": "score",
+            "minimum": 0.8
+          },
+          "saturationBalance": {
+            "type": "score",
+            "minimum": 0.75
+          }
+        }
+      }
+    }
+  }
+}

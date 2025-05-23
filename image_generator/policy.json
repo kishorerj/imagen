@@ -1,94 +1,14 @@
-{
-    "cropping_guidelines": {
-      "optimal_cropping_points": {
-        "description": "Crop below the chest and above the knees for balanced image symmetry."
-      },
-      "avoid_close_up": {
-        "description": "Avoid cropping that creates a close-up of the face."
-      },
-      "avoid_cutting_at_feet": {
-        "description": "Avoid cropping at the feet. Showcase the complete subject for balance."
-      },
-      "symmetry_guidelines": {
-        "description": "Ensure cropping maintains overall symmetry in the image."
-      }
-    },
-    "composition_requirements": {
-      "centre_composition": {
-        "description": "Position the main subject in the center of the frame for balanced visuals."
-      },
-      "horizontal_line_composition": {
-        "description": "Align elements horizontally to create balance and stability."
-      },
-      "vertical_line_composition": {
-        "description": "Align elements vertically to emphasize height and structure."
-      },
-      "symmetrical_composition": {
-        "description": "Create harmony using mirrored visual arrangements."
-      },
-      "slash_composition": {
-        "description": "Use diagonal lines for dynamic and engaging visuals."
-      },
-      "guideline_composition": {
-        "description": "Use lines to guide the viewer's eye naturally through the image."
-      }
-    },
-    "image_specifications": {
-      "aspect_ratio": "9:16",
-      "dimensions": {
-        "width": 1440,
-        "height": 2560
-      },
-      "format": "jpg",
-      "resolution": "72 dpi",
-      "max_file_size": "550 KB"
-    },
 
-    "basic_rules": {
-      "layout": {
-        "avoid_overlap": {
-          "description": "Ensure the image subject doesn't overlap with the clock or other UI elements."
-        },
-        "gap_requirement": {
-          "description": "Maintain a gap of a few pixels between the clock and the subject."
-        }
-      },
-      "avoid_white_backgrounds": {
-        "description": "Avoid using images with white or bright backgrounds that obscure the visibility of the clock."
-      },
-      "safe_areas": {
-        "key_visual_area": {
-          "description": "Ensure that the key visuals are within the designated area and do not overlap with the top UI or bottom UI elements."
-        },
-        "main_ui_area": {
-          "description": "Avoid placing the image focus in the main UI area (used for headline, CTA, and summary)."
-        }
-      }
-    },
-    "image_editing_guidelines": {
-      "placement_and_fill": {
-        "description": "Use content-aware or manual fill to ensure no visible patches remain."
-      },
-      "background_cleanup": {
-        "description": "Remove dust and unwanted objects from the background that divert attention from the main subject."
-      },
-      "color_adjustments": {
-        "remove_tint": {
-          "description": "Remove unwanted tint and adjust the color temperature to achieve a natural look."
-        },
-        "restore_skin_tones": {
-          "description": "Restore skin tones to their natural appearance to avoid over-editing."
-        },
-        "brightness_contrast_saturation": {
-          "description": "Fine-tune brightness, contrast, and saturation to ensure the image is visually balanced and vibrant."
-        }
-      }
-    },
-    "image_quality": {
-      "reduce_noise": {
-        "description": "Reduce grain and noise while retaining clarity. Apply slight sharpening for better details."
-      }
-    }
-   
-  
+{
+  "Global Defaults": "Defines the default values for various resource templates and specifications. This includes defaults for image, video, and text content, composition style, color scheme, OEM, and region.",
+  "Media Type Definitions": "Provides detailed specifications and guidelines for different media types, including images, videos, and text. Each media type has a unique ID, name, and description, along with technical specifications, content guidelines, and validation rules.",
+  "Image Specifications and Guidelines": "Specifies image content requirements for lockscreen backgrounds, including supported file formats (jpg, jpeg, png), aspect ratio (9:16), dimensions (1440x2560 pixels), resolution (72 dpi), and maximum file size (550 kb). Images should have a premium, high-quality appearance and be appropriate for all audiences, with UI elements remaining visible. Positive attributes include high resolution, photorealistic, and detailed qualities, while negative attributes include low quality, pixelation, and distortion.",
+  "Video Specifications and Guidelines": "Specifies video content requirements for dynamic lockscreen backgrounds, including supported file formats (mp4, mov), aspect ratio (9:16), dimensions (1080x1920 pixels), codec (h264), frame rate (30 fps), maximum duration (15 seconds), and maximum file size (5 MB). Videos should have subtle, elegant motion and be appropriate for all audiences, with UI elements remaining visible. Positive attributes include subtle motion, seamless loop, and professionally shot qualities, while negative attributes include rapid movement, shaky camerawork, and low quality.",
+  "Text Specifications and Guidelines": "Specifies text content requirements for headlines, notifications, and descriptions, including supported file formats (txt, json), headline length (80 characters), notification length (120 characters), description length (300 characters), and encoding (UTF-8). Text should be concise and impactful, be appropriate for all audiences, and avoid clickbait or misleading claims. Positive attributes include concise, clear, and engaging qualities, while negative attributes include clickbait, misleading, and grammatical errors.",
+  "UI Layout Specifications": "Defines user interface specifications for different OEMs, affecting content placement. It includes considerations for clock visibility, notification area, and safe zones.",
+  "Clock Visibility": "Ensures clock visibility against content by maintaining adequate spacing, ensuring sufficient contrast, and avoiding placing important elements in the clock display area.",
+  "Notification Area": "Keeps the top portion relatively clear, avoids complex patterns in notification areas, and ensures adequate contrast for notification text.",
+  "Safe Zones": "Keeps areas free of important content to prevent cropping, with specified zone percentages for the top (25%), bottom (15%), left (5%), and right (5%).",
+  "Composition Styles": "Provides different composition styles to make lockscreen content visually appealing. It defines multiple different styles with its description, effect and other parameter.",
+  "Color Scheme Definitions": "Standards for color usage, combinations, and schemes in lockscreen content. It ensures sufficient contrast for UI element visibility and to create harmonious color relationships. Color schemes include monochrome, analogous, complementary, black and white, and natural."
 }

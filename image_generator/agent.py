@@ -10,8 +10,6 @@ from google.adk.sessions import InMemorySessionService
 from .checker_agent import checker_agent_instance
 from google.adk.agents import SequentialAgent, LoopAgent
 from google.adk.agents.callback_context import CallbackContext
-
-
 from vertexai.preview.reasoning_engines import AdkApp
 
 def set_session(callback_context: CallbackContext):
@@ -27,8 +25,8 @@ def set_session(callback_context: CallbackContext):
 llm_news_image_generation = SequentialAgent(
     name='image_generation_scoring_agent',
     description=(
-        'Analyzes a news article and creates the image generation prompt, generates the relevant images with imagen3 and scores the images.' \
-        'if the total_score is greater than 20 stop the execution' 
+        """Your job is to invoke the sub agents image_prompt, image_gen and scoring_agent in sequence.
+        Once the job is complete you have to strictly stop the execution of agents. """
         
     ),
     sub_agents=[image_prompt, image_gen, scoring_prompt]
@@ -46,11 +44,12 @@ session = session_service.create_session(app_name="imagegen_news",
 # sets tool_context.actions.escalate = True.
 main_loop_agent = LoopAgent(
     name="main_loop_agent",
-    description="Repeatedly runs a sequential process and checks a termination condition.",
+    description="Your job is to iteratively run the sub agents in a sequence.Once the job is complete you have to strictly stop the execution of agents. ",
     sub_agents=[
         llm_news_image_generation, # First, run your sequential process [1]
         checker_agent_instance              # Second, check the condition and potentially stop the loop [1]
-    ]
+    ],
+
 )
 root_agent = main_loop_agent
 app = AdkApp(agent=root_agent, artifact_service_builder= InMemoryArtifactService())

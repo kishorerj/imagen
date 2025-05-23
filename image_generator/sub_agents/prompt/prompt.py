@@ -1,2 +1,0 @@
-generate_image_prompt="You are provide with a news article. Your task is to understand the news article and generate a relvant prompt to be used in imagen3 " \
-" to generate an image of the news article." 

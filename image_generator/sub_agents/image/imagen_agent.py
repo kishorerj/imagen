@@ -1,12 +1,12 @@
 from google import genai
 from google.genai import types
-from PIL import Image
-from io import BytesIO
+
 from google.adk.agents import Agent
 from google.adk.tools import ToolContext 
-import os,uuid,tempfile, traceback, json
+import traceback
 from datetime import datetime 
 from google.cloud import storage
+from ... import config
 
 image_uris=[]
 client = genai.Client()
@@ -33,21 +33,21 @@ def generate_images(prompt: str,  tool_context: ToolContext):
                 counter= str(tool_context.state.get('loop_iteration', 0))
                 artifact_name = f"generated_image_"+ counter + ".png"
                 # call save to gcs function
-                save_to_gcs(tool_context, image_bytes, artifact_name, counter)
+                if config.GCS_BUCKET_NAME:
+                    save_to_gcs(tool_context, image_bytes, artifact_name, counter)
                 
                 # Save as ADK artifact (optional, if still needed by other ADK components)
                 report_artifact = types.Part.from_bytes(
                     data=image_bytes,
                     mime_type="image/png"
                 )
-           
                 
                 tool_context.save_artifact(artifact_name, report_artifact)
                 print(f"Image also saved as ADK artifact: {artifact_name}")
 
                 return {
                     'status': 'success',
-                    'message': f'Image generated and saved to GCS. ADK artifact: {artifact_name}.',
+                    'message': f'Image generated .  ADK artifact: {artifact_name}.',
                     'artifact_name': artifact_name
                 }
         else:
@@ -65,7 +65,8 @@ def generate_images(prompt: str,  tool_context: ToolContext):
 def save_to_gcs(tool_context: ToolContext, image_bytes, filename: str, counter:str): 
         # --- Save to GCS ---
     storage_client = storage.Client() # Initialize GCS client
-    bucket_name = "kishorerj-imagen"
+    bucket_name = config.GCS_BUCKET_NAME
+
     unique_id = tool_context.state.get('unique_id','')
     current_date_str = datetime.utcnow().strftime("%Y-%m-%d")
     unique_filename = filename
@@ -98,9 +99,7 @@ image_generation_agent = Agent(
         "You are an expert in creating images with imagen 3"
     ),
     instruction=(
-        "Invoke the 'generate_images' tool by passing the prompt in the 'imagen_prompts' variable as the prompt." 
-    
-    
+        "Invoke the 'generate_images' tool by passing the prompt in the 'imagen_prompts' variable as the prompt."
     ),
     tools=[generate_images],
     output_key="output_image"
